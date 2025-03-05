@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # Conexión a MongoDB
 client = MongoClient("mongodb://localhost:27017/")
-db = client["Biblioteca_Trabajo"]  # Asegúrate de usar el nombre correcto de tu base de datos
+db = client["base_de_datos"]  # Asegúrate de usar el nombre correcto de tu base de datos
 
 # Colecciones
 usuarios_col = db["usuarios"]
