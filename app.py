@@ -21,6 +21,21 @@ def home():
     usuarios = list(usuarios_col.find())  # Obtener la lista de usuarios
     return render_template('index.html', usuarios=usuarios)
 
+# 📌 Agregar un nuevo usuario
+
+@app.route('/agregar_usuario', methods=['POST'])
+def agregar_usuario():
+    nombre = request.form['nombre']
+    email = request.form['email']
+    telefono = request.form['telefono']
+
+    usuarios_col.insert_one({
+        "nombre": nombre,
+        "email": email,
+        "telefono": telefono
+    })
+    return redirect('/')
+
 # 📌 Agregar un nuevo libro
 @app.route('/agregar_libro', methods=['POST'])
 def agregar_libro():
