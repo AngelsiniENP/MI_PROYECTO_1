@@ -18,7 +18,7 @@
     <h1>Gestión de Biblioteca</h1>
 
 
-    <div id="mostrarModal('modalAgregarUsuario')" class="modal">
+    <div id="modalAgregarUsuario" class="modal">
         <div class="modal-content">
             <span class="close" onclick="cerrarModal()">&times;</span>
             <h2>Agregar Nuevo Usuario</h2>
@@ -39,7 +39,7 @@
 
 
     <!-- Lista de usuarios con botón de eliminar -->
-    <h2>Usuarios Registrados</h2>
+    <h2>Libros Registrados</h2>
     <table>
         <tr>
             <th>ID</th>
@@ -62,56 +62,53 @@
         </tr>
         {% endfor %}
     </table>
-
     <button onclick="mostrarModal()">Agregar Usuario</button>
+        <!-- Lista de usuarios con botón de eliminar -->
+        <h2>Usuarios Registrados</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Autor</th>
+                <th>Fecha Publicación</th>
+                <th>Acciones</th>
+            </tr>
+            {% for libro in libros %}
+            <tr>
+                <td>{{ libro._id }}</td>
+                <td>{{ libro.nombre }}</td>
+                <td>{{ libro.autor }}</td>
+                <td>{{ libro.fecha_publicacion }}</td>
+                <td>
+                    <form action="/eliminar_libro/{{ libro._id }}" method="post">
+                        <button type="submit" onclick="return confirm('¿Eliminar este usuario?')">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    <button onclick="mostrarModalLibro()">Agregar Libro</button>
     <!-- Formulario para agregar libros -->
-    
-    <!-- Tabla de libros -->
-    <h2>Libros Registrados</h2>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Autor</th>
-            <th>Año</th>
-            <th>Acciones</th>
-        </tr>
-        {% for libro in libros %}
-        <tr>
-            <td>{{ libro._id }}</td>
-            <td>{{ libro.nombre }}</td>
-            <td>{{ libro.autor }}</td>
-            <td>{{ libro.fecha_publicacion }}</td>
-            <td>
-                <form action="/eliminar_libro/{{ libro._id }}" method="post">
-                    <button type="submit" onclick="return confirm('¿Eliminar este libro?')">Eliminar</button>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-
-    <button onclick="mostrarModal('modalAgregarLibro')">Agregar Libro</button>
-
-    <!-- Modal para agregar libro -->
     <div id="modalAgregarLibro" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="cerrarModal('modalAgregarLibro')">&times;</span>
+            <span class="close" onclick="cerrarModal()">&times;</span>
             <h2>Agregar Nuevo Libro</h2>
             <form action="/agregar_libro" method="post">
-                <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="titulo" required><br><br>
-
+                <label for="nombre">Nombre del Libro:</label>
+                <input type="text" id="nombre" name="nombre" required><br><br>
+        
                 <label for="autor">Autor:</label>
                 <input type="text" id="autor" name="autor" required><br><br>
-
-                <label for="año">Año de Publicación:</label>
-                <input type="number" id="año" name="año" required><br><br>
-
-                <button type="submit">Registrar</button>
+        
+                <label for="fecha_publicacion">Año de Publicación:</label>
+                <input type="number" id="fecha_publicacion" name="fecha_publicacion" required><br><br>
+        
+                <button type="submit">Agregar Libro</button>
             </form>
         </div>
     </div>
+
 
     <!-- Formulario para registrar préstamos -->
     <h2>Registrar Préstamo</h2>
@@ -150,12 +147,14 @@
     </form>
 
     <script>
-        function mostrarModal(id) {
-            document.getElementById(id).style.display = "block";
+        function mostrarModal() {
+            document.getElementById("modalAgregarUsuario").style.display = "block";
         }
-
-        function cerrarModal(id) {
-            document.getElementById(id).style.display = "none";
+        function mostrarModalLibro() {
+            document.getElementById("modalAgregarLibro").style.display = "block";
+        }
+        function cerrarModal() {
+            document.getElementById("modalAgregarUsuario").style.display = "none";
         }
     </script>
 </body>
