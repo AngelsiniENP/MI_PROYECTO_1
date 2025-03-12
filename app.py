@@ -19,7 +19,9 @@ historial_col = db["historial_prestamos"]
 @app.route('/')
 def home():
     usuarios = list(usuarios_col.find())  # Obtener la lista de usuarios
-    return render_template('index.html', usuarios=usuarios)
+    libros = list(libros_col.find())
+    ejemplares = list(ejemplares_col.find())
+    return render_template('index.html', usuarios=usuarios, libros=libros, ejemplares=ejemplares)
 
 # 📌 Agregar un nuevo usuario
 
@@ -115,6 +117,11 @@ def registrar_historial():
 @app.route('/eliminar_usuario/<usuario_id>', methods=['POST'])
 def eliminar_usuario(usuario_id):
     usuarios_col.delete_one({"_id": ObjectId(usuario_id)})
+    return redirect('/')
+
+@app.route('/eliminar_libro/<libro_id>', methods=['POST'])
+def elimina_libro(libro_id):
+    libros_col.delete_one({"_id": ObjectId(libro_id)})
     return redirect('/')
 
 if __name__ == '__main__':
