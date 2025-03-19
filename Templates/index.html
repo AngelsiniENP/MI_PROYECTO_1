@@ -39,7 +39,7 @@
 
 
     <!-- Lista de usuarios con botón de eliminar -->
-    <h2>Libros Registrados</h2>
+    <h2>Usuarios</h2>
     <table>
         <tr>
             <th>ID</th>
@@ -58,6 +58,9 @@
                 <form action="/eliminar_usuario/{{ usuario._id }}" method="post">
                     <button type="submit" onclick="return confirm('¿Eliminar este usuario?')">Eliminar</button>
                 </form>
+                    <!-- Botón para abrir el modal de edición -->
+                    <button onclick="mostrarModalEditar('{{ usuario._id }}', '{{ usuario.nombre }}', '{{ usuario.email }}', '{{ usuario.telefono }}')">Editar</button>
+                
             </td>
         </tr>
         {% endfor %}
@@ -145,6 +148,43 @@
 
         <button type="submit">Registrar Reserva</button>
     </form>
+
+    <!-- Modal de edición -->
+<div id="modalEditarUsuario" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="cerrarModalEditar()">&times;</span>
+        <h2>Editar Usuario</h2>
+        <form id="formEditarUsuario" method="post">
+            <input type="hidden" id="edit_id" name="_id">
+            <label for="edit_nombre">Nombre:</label>
+            <input type="text" id="edit_nombre" name="nombre" required><br><br>
+
+            <label for="edit_email">Email:</label>
+            <input type="email" id="edit_email" name="email" required><br><br>
+
+            <label for="edit_telefono">Teléfono:</label>
+            <input type="text" id="edit_telefono" name="telefono" required><br><br>
+
+            <button type="submit">Actualizar</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function mostrarModalEditar(id, nombre, email, telefono) {
+        document.getElementById("edit_id").value = id;
+        document.getElementById("edit_nombre").value = nombre;
+        document.getElementById("edit_email").value = email;
+        document.getElementById("edit_telefono").value = telefono;
+        document.getElementById("formEditarUsuario").action = "/actualizar_usuario/" + id;
+        document.getElementById("modalEditarUsuario").style.display = "block";
+    }
+    
+    function cerrarModalEditar() {
+        document.getElementById("modalEditarUsuario").style.display = "none";
+    }
+    </script>
+    
 
     <script>
         function mostrarModal() {
