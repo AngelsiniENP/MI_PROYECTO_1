@@ -1,4 +1,6 @@
-USE prueba;
+CREATE DATABASE IF NOT EXISTS Biblioteca;
+
+USE Biblioteca;
 
 CREATE TABLE IF NOT EXISTS autor (
 	_id int AUTO_INCREMENT PRIMARY KEY,
@@ -8,7 +10,7 @@ CREATE TABLE IF NOT EXISTS autor (
 CREATE TABLE IF NOT EXISTS libro (
 	_id INT AUTO_INCREMENT PRIMARY KEY,
 	PAGINAS INT NOT NULL,
-	ISBN INT NOT NULL,
+	ISBN VARCHAR(30) NOT NULL,
 	EDITORIAL VARCHAR(200)
 );
 
@@ -30,8 +32,8 @@ CREATE TABLE IF NOT EXISTS ejemplar (
 CREATE TABLE IF NOT EXISTS usuario (
 	_id INT PRIMARY KEY AUTO_INCREMENT,
 	nombre VARCHAR(30) NOT NULL,
-	telefono INT NOT NULL,
-	direccion VARCHAR(30) NOT NULL
+	telefono VARCHAR(20) NOT NULL,
+	email VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS prestamos (
@@ -39,11 +41,7 @@ CREATE TABLE IF NOT EXISTS prestamos (
 	Fecha_devolucion DATE NOT NULL,
 	ejemplar_id INT,
 	usuario_id INT,
-	PRIMARY KEY(ejemplar_id, usuario_id) AUTO_INCREMENT,
+	PRIMARY KEY(ejemplar_id, usuario_id),
 	FOREIGN KEY (ejemplar_id) REFERENCES ejemplar(_id),
 	FOREIGN KEY (usuario_id) REFERENCES usuario(_id)
 );
-
-USE biblioteca;
-
-DROP TABLE usuario;
