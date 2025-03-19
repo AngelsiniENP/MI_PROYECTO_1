@@ -43,3 +43,7 @@ CREATE TABLE IF NOT EXISTS prestamos (
 	FOREIGN KEY (ejemplar_id) REFERENCES ejemplar(_id),
 	FOREIGN KEY (usuario_id) REFERENCES usuario(_id)
 );
+
+USE biblioteca;
+
+DROP TABLE usuario;
