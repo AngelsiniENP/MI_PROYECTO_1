@@ -113,6 +113,18 @@ def registrar_historial():
     })
     return redirect('/')
 
+@app.route('/actualizar_usuario/<usuario_id>', methods=['POST'])
+def actualizar_usuario(usuario_id):
+    nombre = request.form['nombre']
+    email = request.form['email']
+    telefono = request.form['telefono']
+
+    usuarios_col.update_one(
+        {"_id": ObjectId(usuario_id)},
+        {"$set": {"nombre": nombre, "email": email, "telefono": telefono}}
+    )
+    return redirect('/')
+
 # 📌 Eliminar usuario
 @app.route('/eliminar_usuario/<usuario_id>', methods=['POST'])
 def eliminar_usuario(usuario_id):
