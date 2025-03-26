@@ -9,7 +9,7 @@ En este proyecto de la clase de Git y GitHub, queremos hacer funcionar una pági
 
 ## 🎯 Objetivo  
 
-El objetivo de este proyecto es aprender a utilizar las herramientas de **Git** y **GitHub**, creando una página web sencilla para ingresar datos y almacenarlos, con la finalidad de gestionar una biblioteca digital.  
+Aprender a utilizar las herramientas de **Git** y **GitHub**, creando una página web sencilla para ingresar datos y almacenarlos, con la finalidad de gestionar una biblioteca digital.  
 
 ## 🏗️ Estructura y características del programa  
 
