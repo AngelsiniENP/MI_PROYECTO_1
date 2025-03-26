@@ -1,6 +1,5 @@
 # 📌 Primer Proyecto de la Clase de Git y GitHub  
 
-![Banner](https://via.placeholder.com/1000x300.png?text=Banner+del+Proyecto)  
 
 ## 📖 Descripción  
 
