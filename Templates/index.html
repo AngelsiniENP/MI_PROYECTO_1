@@ -58,6 +58,10 @@
                 <form action="/eliminar_usuario/{{ usuario._id }}" method="post">
                     <button type="submit" onclick="return confirm('¿Eliminar este usuario?')">Eliminar</button>
                 </form>
+                <button onclick="mostrarModalActualizar('{{ usuario._id }}', '{{ usuario.nombre }}', '{{ usuario.email }}', '{{ usuario.telefono }}')">
+                    Actualizar
+                </button>
+            
             </td>
         </tr>
         {% endfor %}
@@ -145,6 +149,44 @@
 
         <button type="submit">Registrar Reserva</button>
     </form>
+
+    <div id="modalActualizarUsuario" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModalActualizar()">&times;</span>
+            <h2>Actualizar Usuario</h2>
+            <form id="formActualizarUsuario" method="post">
+                <input type="hidden" id="usuario_id" name="usuario_id">
+                
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre_actualizar" name="nombre" required><br><br>
+    
+                <label for="email">Email:</label>
+                <input type="email" id="email_actualizar" name="email" required><br><br>
+    
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono_actualizar" name="telefono" required><br><br>
+    
+                <button type="submit">Actualizar</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        function mostrarModalActualizar(id, nombre, email, telefono) {
+            document.getElementById("usuario_id").value = id;
+            document.getElementById("nombre_actualizar").value = nombre;
+            document.getElementById("email_actualizar").value = email;
+            document.getElementById("telefono_actualizar").value = telefono;
+    
+            document.getElementById("formActualizarUsuario").action = "/actualizar_usuario/" + id;
+            document.getElementById("modalActualizarUsuario").style.display = "block";
+        }
+    
+        function cerrarModalActualizar() {
+            document.getElementById("modalActualizarUsuario").style.display = "none";
+        }
+    </script>
+    
 
     <script>
         function mostrarModal() {
